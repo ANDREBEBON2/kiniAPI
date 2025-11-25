@@ -7,6 +7,8 @@ const PORT = process.env.PORT || 5000;
 
 const seedAdmin = require('./src/services/utils/adminSeeder');
 
+const testimoniRoute = require('./src/routes/testimoniRoute');
+const authRoute = require('./src/routes/authRoute');
 
 // koneksi DB
 conectDB;
@@ -28,6 +30,12 @@ app.use(express.urlencoded({ extended: true }));
 
 // Seed Admin User
 seedAdmin();
+
+
+// Routes
+app.use('/api', testimoniRoute);
+
+app.use('/api', authRoute);
 
 // Route Check (Hanya untuk memastikan server hidup)
 app.get('/', (req, res) => {

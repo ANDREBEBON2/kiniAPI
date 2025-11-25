@@ -32,7 +32,6 @@ userSchema.pre("save", async function (next) {
     try {
         // 2. Hash password
         this.password = await bcrypt.hash(this.password, 12);
-        next();
     } catch (error) {
         // 3. PERBAIKAN: Gunakan 'error' asli dari sistem, bukan errorCreate
         next(error); 
