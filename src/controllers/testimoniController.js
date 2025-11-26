@@ -1,9 +1,18 @@
 const Testimoni = require('../models/testimoniModel');
 
 const createTestimoni = async (req, res) => {
-    const { email, name, message } = req.body;
     try {
-        const newTestimoni = new Testimoni({ email, name, message });
+        const { email, name, message } = req.body;
+
+        const photoFilename = req.file ? req.file.filename : undefined;
+
+        const newTestimoni = new Testimoni({
+            email,
+            name,
+            message,
+            photo: photoFilename // Jika undefined, default schema aktif
+        });
+
         await newTestimoni.save();
         res.status(201).json({ message: 'Testimoni created successfully', testimoni: newTestimoni });
     } catch (error) {

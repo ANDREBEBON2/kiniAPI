@@ -15,7 +15,8 @@ const testimoniSchema = new mongoose.Schema({
     },
     photo: {
         type: String,
-        required: false
+        required: true,
+        default: 'default.jpg'
     },
     date: {
         type: Date,
