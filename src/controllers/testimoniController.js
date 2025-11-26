@@ -10,5 +10,13 @@ const createTestimoni = async (req, res) => {
         res.status(500).json({ message: 'Error creating testimoni', error: error.message });
     }
 }
+const getAllTestimoni = async (req, res) => {
+    try {
+        const testimoni = await Testimoni.find();
+        res.status(200).json({ message: 'Testimoni retrieved successfully', testimoni });
+    } catch (error) {
+        res.status(500).json({ message: 'Error creating testimoni', error: error.message });
+    }
+}
 
-module.exports = { createTestimoni };
+module.exports = { createTestimoni, getAllTestimoni };

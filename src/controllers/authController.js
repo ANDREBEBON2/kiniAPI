@@ -1,5 +1,5 @@
 const userModel = require('../models/userModel');   
-
+const {generateToken} = require('../utils/jwtHelper')
 // Fungsi untuk registrasi user baru
 
 
@@ -16,8 +16,24 @@ exports.login = async (req, res) => {
         if (!isMatch) {
             return res.status(400).json({ message: 'Password salah' });
         }
-        res.status(200).json({ message: 'Login berhasil' });
         
+        // Jika login berhasil, buat token JWT
+        const token = generateToken(user);
+
+        // 4. Kirim Response
+        res.status(200).json({
+            status: 'success',
+            message: 'Login berhasil',
+            token: token,
+            data: {
+                id: user._id,
+                name: user.name,
+                email: user.email
+            }
+        });
+
+
+        res.status(200).json({ message: 'Login berhasil', token });
     } catch (error) {
         console.log(error);
         
